@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>it.peruvianit.web</groupId>
+	<artifactId>metric</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Metric</name>
+	<description>
+		Interceptor per il controllo della latenza dei metodi segnati con l'annotazione @MetricPerformance.
+		Quando la Latenza per le richieste web, superano un valore maxLatence(milisecondi), viene aggiunta su una coda Queue per dopo essere elavorata
+	</description>
+  
+	<organization>
+		<name>Peruvianit.</name>
+		<url>https://github.com/peruvianit</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>BSD 2-Clause License</name>
+			<url>https://opensource.org/licenses/BSD-2-Clause</url>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<name>Sergio Arellano</name>
+			<email>sergioarellanodiaz@gmail.com</email>
+			<organization>Peruvianit.</organization>
+			<organizationUrl>https://github.com/peruvianit</organizationUrl>
+		</developer>
+	</developers>
+	
+	<properties>
+		<spring.version>4.0.5.RELEASE</spring.version>	
+		<java.version>1.8</java.version>
+		<maven.deploy>2.7</maven.deploy>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-core</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-web</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+	</dependencies>
+  
+	<distributionManagement>
+		 <snapshotRepository>
+		    <id>nexus-snapshots</id>
+		    <url>http://10.140.7.194:8081/nexus/content/repositories/snapshots</url>
+		 </snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
+			<plugin>
+			   <artifactId>maven-deploy-plugin</artifactId>
+			   <version>${maven.deploy}</version>
+			   <executions>
+			      <execution>
+			         <id>default-deploy</id>
+			         <phase>deploy</phase>
+			         <goals>
+			            <goal>deploy</goal>
+			         </goals>
+			      </execution>
+			   </executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
